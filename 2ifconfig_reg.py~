@@ -1,0 +1,29 @@
+#encoding=utf-8
+import subprocess
+tmp_file = open('/tmp/g.log','w')
+subprocess.call(['ifconfig'], stdout=tmp_file)
+
+tmp_file = open('/tmp/g.log','r')
+ifaces = []
+hostIP = {}
+ifaces.append([]) #向数组的尾端添加一个数组！
+ifaces_cnt = 0
+line_num = 0
+for line_raw in tmp_file:
+    line = line_raw.rstrip() #空行的长度为1，strip后长度才为
+    if len(line) > 0:
+        ifaces[ifaces_cnt].append(line) #向数组的尾端添加一个字符串！
+    else:
+        ifaces_cnt = ifaces_cnt +1
+        ifaces.append([])
+
+ifaces.pop()
+for face in ifaces:
+    key = face[0].split(' ',1)
+    key = key[0]
+    value = face[1]
+    value = value.split(' ',len(value))
+    value = value[11][5:len(value)]
+    hostIP[key] = value
+
+print str(hostIP)
