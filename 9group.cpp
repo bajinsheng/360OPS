@@ -86,14 +86,14 @@ public:
 		return iterator(tmp);
 	}
 	std::vector<tree_node*> get(iterator& k)//get函数
-    {
-        return k._node->children;
-    }
+        {
+                return k._node->children;
+        }
 	tree_node *root;
 private:
 	void destroy(tree_node *some)//销毁内存空间
 	{
-	    #define SAFE_DELETE(p) {if(p){delete p; p=NULL;}}
+	        #define SAFE_DELETE(p) {if(p){delete p; p=NULL;}}
 		for (unsigned i = 0; i < some->children.size(); i++)
 			destroy(some->children[i]);
 		SAFE_DELETE(some);
@@ -116,17 +116,17 @@ int main()
 	tr1.add(three, "360驱动大师");
 	cout<<"树结构定义"<<endl<<"根节点：360"<<endl<<"一层节点：360企业\t\t360个人"<<endl<<"二层节点：360天擎,360天眼\t360安全卫士,360杀毒,360驱动大师"<<endl;
 	cout<<endl<<"get根节点结果:"<<endl;
-    std::vector<node_type*> children = tr1.get(iter);
-    for (int i = 0; i < children.size(); i++)
-    {
-        cout<<children[i]->name<<" ";;
-    }
-    cout<<endl<<endl<<"get360个人节点结果:"<<endl;
-    children = tr1.get(three);
-    for (int i = 0; i < children.size(); i++)
-    {
-        cout<<children[i]->name<<" ";;
-    }
-    cout<<endl;
+    	std::vector<node_type*> children = tr1.get(iter);
+	for (int i = 0; i < children.size(); i++)
+	{
+		cout<<children[i]->name<<" ";;
+	}
+	cout<<endl<<endl<<"get360个人节点结果:"<<endl;
+	children = tr1.get(three);
+	for (int i = 0; i < children.size(); i++)
+	{
+		cout<<children[i]->name<<" ";;
+	}
+	cout<<endl;
 	return 0;
 }
